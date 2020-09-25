@@ -2,7 +2,6 @@
 
 ##################################################3
 #DEFINE FUNCTION
-#driver.get('https://www.google.com/search?q=%C3%BClker+%C3%A7ikolatal%C4%B1+gofret&rlz=1C1GCEU_trTR884TR884&source=lnms&tbm=isch&sa=X&ved=2ahUKEwj0jKeAr__rAhUE0uAKHTZLAVsQ_AUoAXoECAwQAw&biw=1536&bih=754')
 def get_web_product_image(web_link,product_name):
     import pandas as pd
     import numpy as np
