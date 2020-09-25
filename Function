@@ -1,0 +1,54 @@
+
+
+##################################################3
+#DEFINE FUNCTION
+#driver.get('https://www.google.com/search?q=%C3%BClker+%C3%A7ikolatal%C4%B1+gofret&rlz=1C1GCEU_trTR884TR884&source=lnms&tbm=isch&sa=X&ved=2ahUKEwj0jKeAr__rAhUE0uAKHTZLAVsQ_AUoAXoECAwQAw&biw=1536&bih=754')
+def get_web_product_image(web_link,product_name):
+    import pandas as pd
+    import numpy as np
+    import time 
+    import urllib.request
+    from selenium import webdriver
+    from selenium.webdriver import Chrome
+    from selenium.webdriver.common.keys import Keys
+    from selenium.webdriver.support.ui import WebDriverWait
+    from selenium.webdriver.support import expected_conditions as EC
+    from selenium.webdriver.common.by import By
+
+    driver_path="C:/Users/hasan.hamsi/Desktop/Selenium/chromedriver.exe"
+    driver=webdriver.Chrome(executable_path=driver_path)
+    
+    driver.get(web_link)
+    driver.maximize_window()
+    time.sleep(1)
+
+    #by increasing the highest range you can get more content
+    src=[]
+    wait = WebDriverWait(driver,30)
+    for i in range(5):
+        wait.until(EC.visibility_of_element_located((By.TAG_NAME, "body"))).send_keys(Keys.END)
+        time.sleep(1)
+    
+# get the image source
+
+    img = driver.find_elements_by_xpath('//*[@id="islrg"]/div[1]/div[position()>=1 and position()<=100]/a[1]/div[1]/img')
+    for i in range(len(img)):
+        src.append(img[i].get_attribute('src'))
+        #src = img.get_attribute('src')
+    print(src)
+    #print(img)
+    j = 1
+    for i in src:
+        time.sleep(1)
+    
+    
+     # download the image
+    
+        urllib.request.urlretrieve(i,product_name+""+str(j)+".png")
+        j = j+1
+        time.sleep(1)
+    driver.close()
+
+
+###USE FUNCTION
+get_web_product_image(link product_name)
